@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temp Converter</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: #f8e7af;
+        display: grid;
+        place-items: center;
+      }
+      form {
+        background-color: #fab1a0;
+        padding: 20px;
+        width: 400px;
+        height: 250px;
+      }
+      #title {
+        font-size: x-large;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-weight: 200;
+        display: grid;
+        place-items: center;
+      }
+      #temp {
+        margin: 5px 0px 5px 55px;
+        padding: 5px 10px 5px 10px;
+        width: 120px;
+        border-radius: 20px;
+        outline: none;
+      }
+      select {
+        margin: 5px 55px 5px 5px;
+        padding: 5px;
+        border-radius: 20px;
+        width: 120px;
+      }
+      #submit {
+        padding: 5px 15px;
+        margin: 5px 140px;
+        background-color: powderblue;
+        border-color: white;
+      }
+      span {
+        display: block;
+        color: black;
+        text-align: center;
+        font-size: larger;
+        margin-top: 35px 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="tempCalc" onsubmit="calculateTemp() ; return false">
+      <h3 id="title">Temperature Converter</h3>
+      <label for="temp" class="label"
+        >Please enter the temperature you'd like to convert.</label
+      ><br />
+      <input type="number" name="temp" id="temp" autofocus />
+
+      <select name="sel_temp" id="sel_temp">
+        <option value="cel">°Celsius</option>
+        <option value="fah">°Fahrenheit</option></select
+      ><br />
+      <input type="submit" name="temp" id="submit" /><br /><br />
+      <span id="resultContainer"></span>
+    </form>
+
+    <script>
+      // javascript code
+      const calculateTemp = () => {
+        //targetting to temp value
+        const numberTemp = document.getElementById("temp").value;
+        // console.log(numberTemp);
+
+        //targetting to temp type
+        const tempSelected = document.getElementById("sel_temp");
+        const tempType = tempSelected.options[tempSelected.selectedIndex].value;
+        // console.log(tempType);
+
+        const CelToFah = (tem) => {
+          let Fahrenheit = Math.round((tem * 9) / 5 + 32);
+          return Fahrenheit;
+        };
+        const FahToCel = (faht) => {
+          let Celsius = Math.round(((faht - 32) * 5) / 9);
+          return Celsius;
+        };
+
+        let result;
+        if (tempType == "cel") {
+          result = CelToFah(numberTemp);
+          document.getElementById(
+            "resultContainer"
+          ).innerHTML = `= ${result}°Fahrenheit`;
+        } else {
+          result = FahToCel(numberTemp);
+          document.getElementById(
+            "resultContainer"
+          ).innerHTML = `= ${result}°Celsius`;
+        }
+      };
+    </script>
+  </body>
+</html>
